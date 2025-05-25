@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -145,7 +144,7 @@ const Contact = () => {
                   <Mail className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-medium">Email</h3>
-                    <p className="text-muted-foreground">contact@example.com</p>
+                    <p className="text-muted-foreground">smish147@asu.edu</p>
                   </div>
                 </div>
                 
@@ -153,7 +152,7 @@ const Contact = () => {
                   <Phone className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-medium">Phone</h3>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
+                    <p className="text-muted-foreground">623-276-7027</p>
                   </div>
                 </div>
                 
@@ -161,13 +160,13 @@ const Contact = () => {
                   <MapPin className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-medium">Location</h3>
-                    <p className="text-muted-foreground">San Francisco, CA</p>
+                    <p className="text-muted-foreground">Tempe, AZ</p>
                   </div>
                 </div>
               </CardContent>
               <CardFooter>
                 <p className="text-sm text-muted-foreground">
-                  I'm currently available for freelance work and full-time positions.
+                  I'm currently available for full-time positions in backend development and system administration.
                 </p>
               </CardFooter>
             </Card>

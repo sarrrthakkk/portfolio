@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import { Github, Mail, Linkedin } from "lucide-react";
 
@@ -11,7 +10,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <Link to="/" className="text-xl font-bold text-primary">
-              Portfolio
+              Sarthak Mishra
             </Link>
             <p className="text-muted-foreground mt-2">
               &copy; {currentYear}. All rights reserved.
@@ -29,7 +28,7 @@ const Footer = () => {
               <Github className="h-5 w-5" />
             </a>
             <a 
-              href="https://linkedin.com"
+              href="https://linkedin.com/in/sarthakishraftw"
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-primary transition-colors"
@@ -38,7 +37,7 @@ const Footer = () => {
               <Linkedin className="h-5 w-5" />
             </a>
             <a 
-              href="mailto:contact@example.com"
+              href="mailto:smish147@asu.edu"
               className="text-muted-foreground hover:text-primary transition-colors"
               aria-label="Email"
             >

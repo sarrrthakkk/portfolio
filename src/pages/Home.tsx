@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -21,13 +20,13 @@ const Home = () => {
               Hi, I'm{" "}
               <span className="text-primary">
                 <TypewriterEffect 
-                  words={["John Doe", "a Developer", "a Designer", "a Creator"]}
+                  words={["Sarthak Mishra", "a Developer", "a System Administrator", "an IT Specialist"]}
                   typingSpeed={100}
                 />
               </span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              I build exceptional digital experiences that make an impact
+              I build efficient and secure technical solutions with expertise in backend development and IT infrastructure
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg">

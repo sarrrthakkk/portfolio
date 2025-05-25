@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
@@ -20,7 +19,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b">
       <div className="container mx-auto px-4 flex h-16 items-center justify-between">
         <Link to="/" className="text-2xl font-bold text-primary">
-          Portfolio
+          Sarthak Mishra
         </Link>
         
         {/* Desktop Navigation */}

@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,54 +7,54 @@ import { Button } from "@/components/ui/button";
 const projects = [
   {
     id: 1,
-    title: "E-commerce Platform",
-    description: "A fully responsive e-commerce platform with payment integration and user authentication.",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+    title: "Microservice Architecture Implementation",
+    description: "Designed and implemented containerized microservices architecture for a high-traffic application, improving scalability and maintainability.",
+    technologies: ["Docker", "Kubernetes", "Python", "CI/CD", "MongoDB"],
     image: "project1.jpg",
     github: "https://github.com",
     liveDemo: "https://example.com"
   },
   {
     id: 2,
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates and team features.",
-    technologies: ["Next.js", "TypeScript", "Firebase", "Tailwind CSS"],
+    title: "Automated System Administration Tool",
+    description: "Developed a suite of shell scripts for automating common system administration tasks, reducing manual intervention by 40%.",
+    technologies: ["Bash", "Shell Scripting", "Linux", "Cron Jobs"],
     image: "project2.jpg",
     github: "https://github.com",
     liveDemo: "https://example.com"
   },
   {
     id: 3,
-    title: "Portfolio Website",
-    description: "A modern portfolio website that showcases projects and skills with a clean design.",
-    technologies: ["React", "Tailwind CSS", "Framer Motion"],
+    title: "Backend API for E-commerce Platform",
+    description: "Built a scalable REST API backend system for an e-commerce platform handling 10,000+ daily transactions.",
+    technologies: ["Python", "AWS Lambda", "API Gateway", "DynamoDB"],
     image: "project3.jpg",
     github: "https://github.com",
     liveDemo: "https://example.com"
   },
   {
     id: 4,
-    title: "Weather Dashboard",
-    description: "A weather application that displays current conditions and forecasts for multiple locations.",
-    technologies: ["JavaScript", "APIs", "CSS"],
+    title: "Database Performance Optimization",
+    description: "Optimized database queries and schema design for a legacy application, improving response times by 65%.",
+    technologies: ["MySQL", "Database Optimization", "Indexing", "SQL"],
     image: "project4.jpg",
     github: "https://github.com",
     liveDemo: "https://example.com"
   },
   {
     id: 5,
-    title: "Recipe Finder",
-    description: "A web app that helps users discover recipes based on available ingredients.",
-    technologies: ["React", "Redux", "API Integration"],
+    title: "Cloud Infrastructure Migration",
+    description: "Led the migration of on-premises infrastructure to AWS cloud, implementing best practices for security and cost optimization.",
+    technologies: ["AWS", "Terraform", "CloudFormation", "Security"],
     image: "project5.jpg",
     github: "https://github.com",
     liveDemo: "https://example.com"
   },
   {
     id: 6,
-    title: "Social Media Dashboard",
-    description: "An analytics dashboard for tracking social media metrics across multiple platforms.",
-    technologies: ["Vue.js", "Chart.js", "REST APIs"],
+    title: "Kafka-based Real-time Data Processing",
+    description: "Implemented a real-time data processing pipeline using Apache Kafka for streaming analytics.",
+    technologies: ["Apache Kafka", "Java", "Stream Processing", "Analytics"],
     image: "project6.jpg",
     github: "https://github.com",
     liveDemo: "https://example.com"
