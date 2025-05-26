@@ -2,7 +2,35 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import TypewriterEffect from "@/components/TypewriterEffect";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Github, Link as LinkIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+
+const featuredProjects = [
+  {
+    id: 1,
+    title: "Microservice Architecture Implementation",
+    description: "Designed and implemented containerized microservices architecture for a high-traffic application, improving scalability and maintainability.",
+    technologies: ["Docker", "Kubernetes", "Python", "CI/CD", "MongoDB"],
+    github: "https://github.com",
+    liveDemo: "https://example.com"
+  },
+  {
+    id: 2,
+    title: "Automated System Administration Tool",
+    description: "Developed a suite of shell scripts for automating common system administration tasks, reducing manual intervention by 40%.",
+    technologies: ["Bash", "Shell Scripting", "Linux", "Cron Jobs"],
+    github: "https://github.com",
+    liveDemo: "https://example.com"
+  },
+  {
+    id: 3,
+    title: "Backend API for E-commerce Platform",
+    description: "Built a scalable REST API backend system for an e-commerce platform handling 10,000+ daily transactions.",
+    technologies: ["Python", "AWS Lambda", "API Gateway", "DynamoDB"],
+    github: "https://github.com",
+    liveDemo: "https://example.com"
+  }
+];
 
 const Home = () => {
   return (
@@ -49,23 +77,39 @@ const Home = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3].map((item) => (
+            {featuredProjects.map((project) => (
               <motion.div
-                key={item}
+                key={project.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: item * 0.1 }}
+                transition={{ duration: 0.5, delay: project.id * 0.1 }}
                 className="bg-card rounded-lg overflow-hidden shadow-md"
               >
                 <div className="h-48 bg-muted"></div>
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-2">Project {item}</h3>
+                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                   <p className="text-muted-foreground mb-4">
-                    A brief description of this amazing project and the technologies used to build it.
+                    {project.description}
                   </p>
-                  <Button variant="link" className="p-0" asChild>
-                    <Link to="/projects">Learn more</Link>
-                  </Button>
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {project.technologies.slice(0, 3).map((tech) => (
+                      <Badge key={tech} variant="secondary">{tech}</Badge>
+                    ))}
+                  </div>
+                  <div className="flex justify-between">
+                    <Button variant="outline" size="sm" asChild>
+                      <a href={project.github} target="_blank" rel="noopener noreferrer">
+                        <Github className="h-4 w-4 mr-2" />
+                        Code
+                      </a>
+                    </Button>
+                    <Button size="sm" asChild>
+                      <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
+                        <LinkIcon className="h-4 w-4 mr-2" />
+                        Demo
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </motion.div>
             ))}
