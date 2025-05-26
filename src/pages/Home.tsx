@@ -54,7 +54,7 @@ const Home = () => {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              I build efficient and secure technical solutions with expertise in backend development and IT infrastructure
+              I build scalable applications, implement advanced AI models, and architect robust cloud solutions with a focus on performance and security
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg">
