@@ -48,7 +48,7 @@ const Home = () => {
               Hi, I'm{" "}
               <span className="text-primary">
                 <TypewriterEffect 
-                  words={["Sarthak Mishra", "a Developer", "a System Administrator", "an IT Specialist"]}
+                  words={["Sarthak Mishra", "a Full Stack Developer", "an AI Researcher", "a Cloud Engineer"]}
                   typingSpeed={100}
                 />
               </span>
