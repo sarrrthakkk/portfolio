@@ -11,7 +11,7 @@ const projects = [
     description: "Designed and implemented containerized microservices architecture for a high-traffic application, improving scalability and maintainability.",
     technologies: ["Docker", "Kubernetes", "Python", "CI/CD", "MongoDB"],
     image: "project1.jpg",
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   },
   {
@@ -20,7 +20,7 @@ const projects = [
     description: "Developed a suite of shell scripts for automating common system administration tasks, reducing manual intervention by 40%.",
     technologies: ["Bash", "Shell Scripting", "Linux", "Cron Jobs"],
     image: "project2.jpg",
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   },
   {
@@ -29,34 +29,34 @@ const projects = [
     description: "Built a scalable REST API backend system for an e-commerce platform handling 10,000+ daily transactions.",
     technologies: ["Python", "AWS Lambda", "API Gateway", "DynamoDB"],
     image: "project3.jpg",
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   },
   {
     id: 4,
-    title: "Database Performance Optimization",
-    description: "Optimized database queries and schema design for a legacy application, improving response times by 65%.",
-    technologies: ["MySQL", "Database Optimization", "Indexing", "SQL"],
+    title: "AI-Powered Data Analysis Tool",
+    description: "Developed an AI tool for automated data analysis and visualization, reducing analysis time by 60%.",
+    technologies: ["Python", "TensorFlow", "Pandas", "Matplotlib"],
     image: "project4.jpg",
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   },
   {
     id: 5,
-    title: "Cloud Infrastructure Migration",
-    description: "Led the migration of on-premises infrastructure to AWS cloud, implementing best practices for security and cost optimization.",
-    technologies: ["AWS", "Terraform", "CloudFormation", "Security"],
+    title: "Cloud Infrastructure Automation",
+    description: "Created infrastructure as code templates for automated cloud resource provisioning and management.",
+    technologies: ["Terraform", "AWS", "Ansible", "Jenkins"],
     image: "project5.jpg",
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   },
   {
     id: 6,
-    title: "Kafka-based Real-time Data Processing",
-    description: "Implemented a real-time data processing pipeline using Apache Kafka for streaming analytics.",
-    technologies: ["Apache Kafka", "Java", "Stream Processing", "Analytics"],
+    title: "Real-time Data Processing Pipeline",
+    description: "Built a real-time data processing pipeline handling 1M+ events per day with 99.9% uptime.",
+    technologies: ["Kafka", "Spark", "Python", "Redis"],
     image: "project6.jpg",
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   }
 ];

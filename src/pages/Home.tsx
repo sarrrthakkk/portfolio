@@ -11,7 +11,7 @@ const featuredProjects = [
     title: "Microservice Architecture Implementation",
     description: "Designed and implemented containerized microservices architecture for a high-traffic application, improving scalability and maintainability.",
     technologies: ["Docker", "Kubernetes", "Python", "CI/CD", "MongoDB"],
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   },
   {
@@ -19,7 +19,7 @@ const featuredProjects = [
     title: "Automated System Administration Tool",
     description: "Developed a suite of shell scripts for automating common system administration tasks, reducing manual intervention by 40%.",
     technologies: ["Bash", "Shell Scripting", "Linux", "Cron Jobs"],
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   },
   {
@@ -27,7 +27,7 @@ const featuredProjects = [
     title: "Backend API for E-commerce Platform",
     description: "Built a scalable REST API backend system for an e-commerce platform handling 10,000+ daily transactions.",
     technologies: ["Python", "AWS Lambda", "API Gateway", "DynamoDB"],
-    github: "https://github.com",
+    github: "https://github.com/sarrrthakkk",
     liveDemo: "https://example.com"
   }
 ];
