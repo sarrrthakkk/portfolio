@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 
 interface TypewriterProps {
@@ -60,7 +59,11 @@ const TypewriterEffect = ({
 
   return (
     <span className={`typing-cursor inline-block ${className}`}>
-      {displayText}
+      {displayText.split('').map((char, index) => (
+        <span key={index} className="text-blue-500">
+          {char}
+        </span>
+      ))}
     </span>
   );
 };
