@@ -166,7 +166,7 @@ const Contact = () => {
               </CardContent>
               <CardFooter>
                 <p className="text-sm text-muted-foreground">
-                  I'm currently available for full-time positions in backend development and system administration.
+                  I'm currently available for full-time positions in backend development, cloud engineering, and artificial intelligence.
                 </p>
               </CardFooter>
             </Card>
