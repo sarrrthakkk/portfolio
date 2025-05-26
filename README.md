@@ -60,6 +60,23 @@ This project can be deployed to any static hosting service of your choice, such 
 - GitHub Pages
 - AWS Amplify
 
+### GitHub Pages Deployment
+
+To deploy to GitHub Pages:
+
+1. Make sure your repository is public
+2. Run the following commands:
+```sh
+npm run deploy
+```
+3. Go to your repository settings on GitHub
+4. Navigate to "Pages" in the sidebar
+5. Under "Source", select "Deploy from a branch"
+6. Select the "gh-pages" branch and "/ (root)" folder
+7. Click "Save"
+
+Your site will be available at: `https://<your-github-username>.github.io/type-spark-portfolio/`
+
 ## Custom Domain
 
 You can connect a custom domain to your portfolio by following the deployment platform's specific instructions for domain configuration.

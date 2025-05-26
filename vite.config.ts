@@ -14,7 +14,7 @@ export default defineConfig(({ mode }) => ({
     mode === 'development' &&
     componentTagger(),
   ].filter(Boolean),
-  base: '/type-spark-portfolio/',
+  base: '/portfolio/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
