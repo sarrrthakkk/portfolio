@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -15,34 +15,60 @@ const navLinks = [
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const [show, setShow] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY <= 0) {
+        setShow(true);
+      } else if (currentScrollY > lastScrollY.current) {
+        setShow(false); // scrolling down
+      } else {
+        setShow(true); // scrolling up
+      }
+      lastScrollY.current = currentScrollY;
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full bg-background/80 backdrop-blur-sm border-b transition-transform duration-300",
+        show ? "translate-y-0" : "-translate-y-full"
+      )}
+    >
       <div className="container mx-auto px-4 flex h-16 items-center justify-between">
-        <Link to="/" className="text-2xl font-bold text-primary">
-          Sarthak Mishra
-        </Link>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={cn(
-                "font-medium transition-colors hover:text-primary",
-                location.pathname === link.path
-                  ? "text-primary"
-                  : "text-muted-foreground"
-              )}
-            >
-              {link.text}
-            </Link>
-          ))}
-        </nav>
-        
-        {/* Mobile Navigation */}
-        <div className="flex items-center gap-2">
+        {/* Left: Logo */}
+        <div className="flex-1 flex items-center justify-start min-w-0">
+          <Link to="/" className="text-2xl font-bold text-primary whitespace-nowrap">
+            Sarthak Mishra
+          </Link>
+        </div>
+        {/* Center: Nav Links */}
+        <div className="flex-1 flex justify-center min-w-0">
+          <nav className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  "font-medium transition-colors hover:text-primary",
+                  location.pathname === link.path
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                )}
+              >
+                {link.text}
+              </Link>
+            ))}
+          </nav>
+        </div>
+        {/* Right: Theme Toggle & Menu */}
+        <div className="flex-1 flex items-center justify-end gap-2 min-w-0">
           <ThemeToggle />
           <Button
             variant="ghost"

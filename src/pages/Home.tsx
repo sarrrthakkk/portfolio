@@ -36,7 +36,7 @@ const Home = () => {
   return (
     <div>
       {/* Hero Section */}
-      <section className="py-20 md:py-32">
+      <section className="min-h-screen flex items-center py-20 md:py-32 relative">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -69,6 +69,12 @@ const Home = () => {
             </div>
           </motion.div>
         </div>
+        {/* Scroll Down Indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 hidden md:block">
+          <span className="animate-bounce text-muted-foreground">
+            <svg width="32" height="32" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m0 0-7-7m7 7 7-7"/></svg>
+          </span>
+        </div>
       </section>
 
       {/* Featured Section */}
@@ -85,7 +91,7 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: project.id * 0.1 }}
                 className="bg-card rounded-lg overflow-hidden shadow-md"
               >
-                <div className="h-48 bg-muted"></div>
+                <img src={`https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                   <p className="text-muted-foreground mb-4">

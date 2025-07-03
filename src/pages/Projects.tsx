@@ -83,7 +83,7 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="h-full flex flex-col overflow-hidden">
-                <div className="h-48 bg-muted"></div>
+                <img src={`https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
                 <CardHeader>
                   <CardTitle>{project.title}</CardTitle>
                   <CardDescription>{project.description}</CardDescription>
