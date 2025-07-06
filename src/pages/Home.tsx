@@ -31,7 +31,7 @@ const featuredProjects = [
     description: "A Flask web app to export all your Spotify playlists and tracks to a CSV file, ready for download. No files are stored on the server—your data is streamed directly to you!",
     technologies: ["Python", "Flask", "Spotify API", "OAuth", "CSV"],
     github: "https://github.com/sarrrthakkk/guardians-of-the-playlist",
-    liveDemo: "https://example.com",
+    liveDemo: "https://youtu.be/t9MeMAa7Tlk",
     image: guardiansImg
   }
 ];
@@ -93,10 +93,10 @@ const Home = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: project.id * 0.1 }}
-                className="bg-card rounded-lg overflow-hidden shadow-md"
+                className="bg-card rounded-lg overflow-hidden shadow-md h-full flex flex-col"
               >
                 <img src={project.image || `https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-grow">
                   <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                   <p className="text-muted-foreground mb-4">
                     {project.description}
@@ -106,7 +106,7 @@ const Home = () => {
                       <Badge key={tech} variant="secondary">{tech}</Badge>
                     ))}
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between mt-auto">
                     <Button variant="outline" size="sm" asChild>
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="h-4 w-4 mr-2" />
