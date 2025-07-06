@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import aboutPhoto from "@/assets/about-photo.jpg";
 
 const skills = [
   // Cloud & Infrastructure
@@ -30,7 +31,11 @@ const About = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-1">
-            <div className="bg-muted aspect-square rounded-lg overflow-hidden mb-4"></div>
+            <img
+              src={aboutPhoto}
+              alt="Sarthak Mishra"
+              className="bg-muted aspect-square rounded-lg overflow-hidden mb-4 object-cover w-full h-auto"
+            />
             <h2 className="text-2xl font-semibold mb-2">Sarthak Mishra</h2>
             <p className="text-muted-foreground">Full Stack Developer, AI Researcher & Cloud Engineer</p>
             <div className="mt-4">
