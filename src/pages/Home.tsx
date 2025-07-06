@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 import TypewriterEffect from "@/components/TypewriterEffect";
 import { ArrowRight, Github, Link as LinkIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import guardiansImg from "@/assets/guardians-of-the-playlists.jpg";
+import llama2Img from "@/assets/llama-2-snip.png";
 
 const featuredProjects = [
   {
     id: 1,
-    title: "Microservice Architecture Implementation",
-    description: "Designed and implemented containerized microservices architecture for a high-traffic application, improving scalability and maintainability.",
-    technologies: ["Docker", "Kubernetes", "Python", "CI/CD", "MongoDB"],
-    github: "https://github.com/sarrrthakkk",
-    liveDemo: "https://example.com"
+    title: "Llama-2: Optimizing LLMs for Efficient Inference & Adaptation",
+    description: "This project investigates optimization techniques for Large Language Models (LLMs), focusing on LLaMA-2. It integrates efficient architectural improvements and inference methods to reduce memory usage and speed up text generation without compromising model quality.",
+    technologies: ["Python", "PyTorch", "LLaMA-2", "LoRA", "Transformer", "NLP"],
+    github: "https://github.com/vibhu-dixit/Llama-2",
+    liveDemo: "https://docs.google.com/presentation/d/1nD79Gjl_E-mwHx-hff1kB3_GH-QSa4MjRQ56aXW-Kag/edit?slide=id.p#slide=id.p",
+    image: llama2Img
   },
   {
     id: 2,
@@ -24,11 +27,12 @@ const featuredProjects = [
   },
   {
     id: 3,
-    title: "Backend API for E-commerce Platform",
-    description: "Built a scalable REST API backend system for an e-commerce platform handling 10,000+ daily transactions.",
-    technologies: ["Python", "AWS Lambda", "API Gateway", "DynamoDB"],
-    github: "https://github.com/sarrrthakkk",
-    liveDemo: "https://example.com"
+    title: "Guardians of the Playlist",
+    description: "A Flask web app to export all your Spotify playlists and tracks to a CSV file, ready for download. No files are stored on the server—your data is streamed directly to you!",
+    technologies: ["Python", "Flask", "Spotify API", "OAuth", "CSV"],
+    github: "https://github.com/sarrrthakkk/guardians-of-the-playlist",
+    liveDemo: "https://example.com",
+    image: guardiansImg
   }
 ];
 
@@ -91,14 +95,14 @@ const Home = () => {
                 transition={{ duration: 0.5, delay: project.id * 0.1 }}
                 className="bg-card rounded-lg overflow-hidden shadow-md"
               >
-                <img src={`https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
+                <img src={project.image || `https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                   <p className="text-muted-foreground mb-4">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.slice(0, 3).map((tech) => (
+                    {project.technologies.map((tech) => (
                       <Badge key={tech} variant="secondary">{tech}</Badge>
                     ))}
                   </div>

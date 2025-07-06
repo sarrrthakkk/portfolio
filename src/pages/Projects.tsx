@@ -3,6 +3,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Badge } from "@/components/ui/badge";
 import { Github, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import guardiansImg from "@/assets/guardians-of-the-playlists.jpg";
+import llama2Img from "@/assets/llama-2-snip.png";
 
 const projects = [
   {
@@ -25,21 +27,21 @@ const projects = [
   },
   {
     id: 3,
-    title: "Backend API for E-commerce Platform",
-    description: "Built a scalable REST API backend system for an e-commerce platform handling 10,000+ daily transactions.",
-    technologies: ["Python", "AWS Lambda", "API Gateway", "DynamoDB"],
-    image: "project3.jpg",
-    github: "https://github.com/sarrrthakkk",
+    title: "Guardians of the Playlist",
+    description: "A Flask web app to export all your Spotify playlists and tracks to a CSV file, ready for download. No files are stored on the server—your data is streamed directly to you!",
+    technologies: ["Python", "Flask", "Spotify API", "OAuth", "CSV"],
+    image: guardiansImg,
+    github: "https://github.com/sarrrthakkk/guardians-of-the-playlist",
     liveDemo: "https://example.com"
   },
   {
     id: 4,
-    title: "AI-Powered Data Analysis Tool",
-    description: "Developed an AI tool for automated data analysis and visualization, reducing analysis time by 60%.",
-    technologies: ["Python", "TensorFlow", "Pandas", "Matplotlib"],
-    image: "project4.jpg",
-    github: "https://github.com/sarrrthakkk",
-    liveDemo: "https://example.com"
+    title: "Llama-2: Optimizing LLMs for Efficient Inference & Adaptation",
+    description: "This project investigates optimization techniques for Large Language Models (LLMs), focusing on LLaMA-2. It integrates efficient architectural improvements and inference methods to reduce memory usage and speed up text generation without compromising model quality. Features include Rotary Positional Encoding, Grouped Multi-Query Attention, Key-Value Caching, SwiGLU activation, and LoRA integration.",
+    technologies: ["Python", "PyTorch", "LLaMA-2", "LoRA", "Transformer", "NLP"],
+    image: llama2Img,
+    github: "https://github.com/vibhu-dixit/Llama-2",
+    liveDemo: "https://docs.google.com/presentation/d/1nD79Gjl_E-mwHx-hff1kB3_GH-QSa4MjRQ56aXW-Kag/edit?slide=id.p#slide=id.p"
   },
   {
     id: 5,
@@ -83,7 +85,7 @@ const Projects = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <Card className="h-full flex flex-col overflow-hidden">
-                <img src={`https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
+                <img src={project.image || `https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
                 <CardHeader>
                   <CardTitle>{project.title}</CardTitle>
                   <CardDescription>{project.description}</CardDescription>
