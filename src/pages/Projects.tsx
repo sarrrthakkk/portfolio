@@ -33,7 +33,7 @@ const projects = [
     technologies: ["Python", "Flask", "Spotify API", "OAuth", "CSV"],
     image: guardiansImg,
     github: "https://github.com/sarrrthakkk/guardians-of-the-playlist",
-    liveDemo: "https://example.com"
+    liveDemo: "https://youtu.be/t9MeMAa7Tlk?si=lkfuQ35QlGELpogD"
   },
   {
     id: 4,
