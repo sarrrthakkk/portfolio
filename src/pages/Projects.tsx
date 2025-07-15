@@ -5,6 +5,7 @@ import { Github, Link as LinkIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import guardiansImg from "@/assets/guardians-of-the-playlists.jpg";
 import llama2Img from "@/assets/llama-2-snip.png";
+import { useEffect } from "react";
 
 const projects = [
   {
@@ -64,6 +65,9 @@ const projects = [
 ];
 
 const Projects = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="container mx-auto px-4 py-16">
       <motion.div
