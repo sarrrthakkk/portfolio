@@ -34,7 +34,7 @@ const About = () => {
             <img
               src={aboutPhoto}
               alt="Sarthak Mishra"
-              className="bg-muted aspect-square rounded-lg overflow-hidden mb-4 object-cover w-full h-auto"
+              className="bg-muted aspect-square rounded-full overflow-hidden mb-4 object-cover w-full h-auto"
             />
             <h2 className="text-2xl font-semibold mb-2">Sarthak Mishra</h2>
             <p className="text-muted-foreground">Full Stack Developer, AI Researcher & Cloud Engineer</p>
