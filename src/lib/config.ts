@@ -6,5 +6,8 @@ export const config = {
     email: "smish147@asu.edu",
     phone: "623-276-7027",
     location: "Tempe, AZ"
+  },
+  analytics: {
+    googleAnalyticsId: "G-92LTFZ9469"
   }
 };

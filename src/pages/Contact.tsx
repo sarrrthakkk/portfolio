@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { config } from "@/lib/config";
+import { trackPortfolioInteraction } from "@/lib/analytics";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -44,6 +45,9 @@ const Contact = () => {
       });
 
       if (response.ok) {
+        // Track successful form submission
+        trackPortfolioInteraction.contactFormSubmit();
+        
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your message. I'll get back to you soon!",
