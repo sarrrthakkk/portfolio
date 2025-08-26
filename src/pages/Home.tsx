@@ -6,6 +6,7 @@ import { ArrowRight, Github, Link as LinkIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import guardiansImg from "@/assets/guardians-of-the-playlists.jpg";
 import llama2Img from "@/assets/llama-2-snip.png";
+import { trackNavigation, trackProjectInteractions, trackPortfolioInteraction } from "@/lib/analytics";
 
 const featuredProjects = [
   {
@@ -37,6 +38,18 @@ const featuredProjects = [
 ];
 
 const Home = () => {
+  const handleCTAClick = (ctaType: string, location: string) => {
+    trackNavigation.ctaClick(ctaType, location);
+  };
+
+  const handleProjectInteraction = (projectName: string, action: 'github' | 'demo') => {
+    trackProjectInteractions.projectButtonClick(projectName, action, 0);
+  };
+
+  const handleNavigationClick = (page: string) => {
+    trackNavigation.pageView(page);
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -61,11 +74,20 @@ const Home = () => {
               I build scalable applications, implement advanced AI models, and architect robust cloud solutions with a focus on performance and security
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button asChild size="lg">
-                <Link to="/projects">View My Work</Link>
+              <Button 
+                asChild 
+                size="lg"
+                onClick={() => handleCTAClick('view_work', 'hero')}
+              >
+                <Link to="/projects" onClick={() => handleNavigationClick('projects')}>View My Work</Link>
               </Button>
-              <Button variant="outline" size="lg" asChild>
-                <Link to="/contact">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                asChild
+                onClick={() => handleCTAClick('contact', 'hero')}
+              >
+                <Link to="/contact" onClick={() => handleNavigationClick('contact')}>
                   Contact Me
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
@@ -94,6 +116,7 @@ const Home = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: project.id * 0.1 }}
                 className="bg-card rounded-lg overflow-hidden shadow-md h-full flex flex-col"
+                onAnimationComplete={() => trackProjectInteractions.projectCardView(project.title, project.technologies)}
               >
                 <img src={project.image || `https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
                 <div className="p-6 flex flex-col flex-grow">
@@ -107,13 +130,22 @@ const Home = () => {
                     ))}
                   </div>
                   <div className="flex justify-between mt-auto">
-                    <Button variant="outline" size="sm" asChild>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      asChild
+                      onClick={() => handleProjectInteraction(project.title, 'github')}
+                    >
                       <a href={project.github} target="_blank" rel="noopener noreferrer">
                         <Github className="h-4 w-4 mr-2" />
                         Code
                       </a>
                     </Button>
-                    <Button size="sm" asChild>
+                    <Button 
+                      size="sm" 
+                      asChild
+                      onClick={() => handleProjectInteraction(project.title, 'demo')}
+                    >
                       <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
                         <LinkIcon className="h-4 w-4 mr-2" />
                         Demo
@@ -126,8 +158,11 @@ const Home = () => {
           </div>
           
           <div className="text-center mt-12">
-            <Button asChild>
-              <Link to="/projects">View All Projects</Link>
+            <Button 
+              asChild
+              onClick={() => handleCTAClick('view_all_projects', 'featured_section')}
+            >
+              <Link to="/projects" onClick={() => handleNavigationClick('projects')}>View All Projects</Link>
             </Button>
           </div>
         </div>
@@ -142,8 +177,12 @@ const Home = () => {
               I'm currently available for freelance work or full-time positions.
               If you're interested in working together, please get in touch!
             </p>
-            <Button size="lg" asChild>
-              <Link to="/contact">Get in Touch</Link>
+            <Button 
+              size="lg" 
+              asChild
+              onClick={() => handleCTAClick('get_in_touch', 'cta_section')}
+            >
+              <Link to="/contact" onClick={() => handleNavigationClick('contact')}>Get in Touch</Link>
             </Button>
           </div>
         </div>

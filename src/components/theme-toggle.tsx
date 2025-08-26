@@ -1,15 +1,22 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
+import { trackPortfolioInteraction } from "@/lib/analytics";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
+
+  const handleThemeToggle = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    trackPortfolioInteraction.themeToggle(newTheme);
+  };
 
   return (
     <Button
       variant="ghost"
       size="icon"
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      onClick={handleThemeToggle}
       className="rounded-full"
     >
       <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />

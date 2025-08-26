@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import guardiansImg from "@/assets/guardians-of-the-playlists.jpg";
 import llama2Img from "@/assets/llama-2-snip.png";
 import { useEffect } from "react";
+import { trackProjectInteractions, trackPortfolioInteraction } from "@/lib/analytics";
 
 const projects = [
   {
@@ -68,6 +69,19 @@ const Projects = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleProjectCardView = (projectName: string, technologies: string[]) => {
+    trackProjectInteractions.projectCardView(projectName, technologies);
+  };
+
+  const handleProjectButtonClick = (projectName: string, buttonType: 'github' | 'demo', projectId: number) => {
+    trackProjectInteractions.projectButtonClick(projectName, buttonType, projectId);
+  };
+
+  const handleTechnologyHover = (technology: string) => {
+    trackPortfolioInteraction.skillHover(technology);
+  };
+
   return (
     <div className="container mx-auto px-4 py-16">
       <motion.div
@@ -87,6 +101,7 @@ const Projects = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              onAnimationComplete={() => handleProjectCardView(project.title, project.technologies)}
             >
               <Card className="h-full flex flex-col overflow-hidden">
                 <img src={project.image || `https://placehold.co/600x240?text=Project+${project.id}`} alt={project.title} className="h-48 w-full object-cover bg-muted" />
@@ -97,18 +112,33 @@ const Projects = () => {
                 <CardContent className="flex-grow">
                   <div className="flex flex-wrap gap-2 mt-2">
                     {project.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary">{tech}</Badge>
+                      <Badge 
+                        key={tech} 
+                        variant="secondary"
+                        onMouseEnter={() => handleTechnologyHover(tech)}
+                      >
+                        {tech}
+                      </Badge>
                     ))}
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">
-                  <Button variant="outline" size="sm" asChild>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    asChild
+                    onClick={() => handleProjectButtonClick(project.title, 'github', project.id)}
+                  >
                     <a href={project.github} target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4 mr-2" />
                       Code
                     </a>
                   </Button>
-                  <Button size="sm" asChild>
+                  <Button 
+                    size="sm" 
+                    asChild
+                    onClick={() => handleProjectButtonClick(project.title, 'demo', project.id)}
+                  >
                     <a href={project.liveDemo} target="_blank" rel="noopener noreferrer">
                       <LinkIcon className="h-4 w-4 mr-2" />
                       Demo

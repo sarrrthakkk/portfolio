@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { config } from "@/lib/config";
-import { trackPortfolioInteraction } from "@/lib/analytics";
+import { trackPortfolioInteraction, trackFormInteractions } from "@/lib/analytics";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -19,10 +19,25 @@ const Contact = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    
+    // Track form start on first interaction
+    if (!hasStarted) {
+      setHasStarted(true);
+      trackFormInteractions.formStart();
+    }
+  };
+
+  const handleFieldFocus = (fieldName: string) => {
+    trackFormInteractions.fieldFocus(fieldName);
+  };
+
+  const handleFieldBlur = (fieldName: string) => {
+    trackFormInteractions.fieldBlur(fieldName);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -60,6 +75,9 @@ const Contact = () => {
           subject: "",
           message: ""
         });
+        
+        // Reset form start tracking
+        setHasStarted(false);
       } else {
         throw new Error("Failed to send message");
       }
@@ -106,6 +124,8 @@ const Contact = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
+                        onFocus={() => handleFieldFocus('name')}
+                        onBlur={() => handleFieldBlur('name')}
                         placeholder="Your name"
                         required
                       />
@@ -118,6 +138,8 @@ const Contact = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
+                        onFocus={() => handleFieldFocus('email')}
+                        onBlur={() => handleFieldBlur('email')}
                         placeholder="your.email@example.com"
                         required
                       />
@@ -131,6 +153,8 @@ const Contact = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
+                      onFocus={() => handleFieldFocus('subject')}
+                      onBlur={() => handleFieldBlur('subject')}
                       placeholder="What is this regarding?"
                       required
                     />
@@ -143,6 +167,8 @@ const Contact = () => {
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
+                      onFocus={() => handleFieldFocus('message')}
+                      onBlur={() => handleFieldBlur('message')}
                       placeholder="Your message here..."
                       rows={6}
                       required

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import aboutPhoto from "@/assets/about-photo.jpg";
+import { trackSocialMedia, trackPortfolioInteraction } from "@/lib/analytics";
 
 const skills = [
   // Cloud & Infrastructure
@@ -20,6 +21,24 @@ const skills = [
 ];
 
 const About = () => {
+  const handleContactClick = (type: 'email' | 'phone' | 'linkedin', context: string) => {
+    switch (type) {
+      case 'email':
+        trackSocialMedia.email(context);
+        break;
+      case 'phone':
+        trackSocialMedia.phone(context);
+        break;
+      case 'linkedin':
+        trackSocialMedia.linkedin();
+        break;
+    }
+  };
+
+  const handleSkillHover = (skill: string) => {
+    trackPortfolioInteraction.skillHover(skill);
+  };
+
   return (
     <div className="container mx-auto px-4 py-16">
       <motion.div
@@ -39,9 +58,35 @@ const About = () => {
             <h2 className="text-2xl font-semibold mb-2">Sarthak Mishra</h2>
             <p className="text-muted-foreground">Full Stack Developer, AI Researcher & Cloud Engineer</p>
             <div className="mt-4">
-              <p className="text-sm">📧 <a href="mailto:smish147@asu.edu" className="text-primary hover:underline">smish147@asu.edu</a></p>
-              <p className="text-sm">📞 <a href="tel:+16232767027" className="text-primary hover:underline">623-276-7027</a></p>
-              <p className="text-sm">💼 <a href="https://linkedin.com/in/sarthakmishraftw" className="text-primary hover:underline">LinkedIn Profile</a></p>
+              <p className="text-sm">
+                📧 <a 
+                  href="mailto:smish147@asu.edu" 
+                  className="text-primary hover:underline"
+                  onClick={() => handleContactClick('email', 'about_page')}
+                >
+                  smish147@asu.edu
+                </a>
+              </p>
+              <p className="text-sm">
+                📞 <a 
+                  href="tel:+16232767027" 
+                  className="text-primary hover:underline"
+                  onClick={() => handleContactClick('phone', 'about_page')}
+                >
+                  623-276-7027
+                </a>
+              </p>
+              <p className="text-sm">
+                💼 <a 
+                  href="https://linkedin.com/in/sarthakmishraftw" 
+                  className="text-primary hover:underline"
+                  onClick={() => handleContactClick('linkedin', 'about_page')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  LinkedIn Profile
+                </a>
+              </p>
             </div>
           </div>
           
@@ -63,7 +108,8 @@ const About = () => {
                 {skills.map((skill) => (
                   <span 
                     key={skill} 
-                    className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm text-center"
+                    className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm text-center cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                    onMouseEnter={() => handleSkillHover(skill)}
                   >
                     {skill}
                   </span>
