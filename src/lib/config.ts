@@ -1,6 +1,6 @@
 export const config = {
   formspree: {
-    endpoint: "https://formspree.io/f/mldwejzb" // Replace with your actual Formspree endpoint
+    endpoint: "https://formspree.io/f/mldwejzb"
   },
   contact: {
     email: "smish147@asu.edu",
