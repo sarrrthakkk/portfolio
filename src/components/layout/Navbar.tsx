@@ -7,8 +7,9 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 const navLinks = [
   { text: "Home", path: "/" },
-  { text: "About", path: "/about" },
+  { text: "Experience", path: "/experience" },
   { text: "Projects", path: "/projects" },
+  { text: "About", path: "/about" },
   { text: "Contact", path: "/contact" },
 ];
 
@@ -57,7 +58,8 @@ const Navbar = () => {
                 to={link.path}
                 className={cn(
                   "font-medium transition-colors hover:text-primary",
-                  location.pathname === link.path
+                  location.pathname === link.path ||
+                    (link.path !== "/" && location.pathname.startsWith(link.path))
                     ? "text-primary"
                     : "text-muted-foreground"
                 )}
@@ -92,7 +94,8 @@ const Navbar = () => {
                 to={link.path}
                 className={cn(
                   "text-lg font-medium transition-colors hover:text-primary px-2 py-1",
-                  location.pathname === link.path
+                  location.pathname === link.path ||
+                    (link.path !== "/" && location.pathname.startsWith(link.path))
                     ? "text-primary"
                     : "text-muted-foreground"
                 )}

@@ -1,14 +1,27 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 import { config } from "@/lib/config";
-import { trackPortfolioInteraction, trackFormInteractions } from "@/lib/analytics";
+import { profile } from "@/content";
+import {
+  trackPortfolioInteraction,
+  trackFormInteractions,
+  trackSocialMedia,
+} from "@/lib/analytics";
+import ResumeButton from "@/components/ResumeButton";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -16,16 +29,17 @@ const Contact = () => {
     name: "",
     email: "",
     subject: "",
-    message: ""
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    
-    // Track form start on first interaction
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
     if (!hasStarted) {
       setHasStarted(true);
       trackFormInteractions.formStart();
@@ -43,7 +57,7 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     try {
       const response = await fetch(config.formspree.endpoint, {
         method: "POST",
@@ -55,28 +69,24 @@ const Contact = () => {
           email: formData.email,
           subject: formData.subject,
           message: formData.message,
-          _subject: `Portfolio Contact: ${formData.subject}` // Custom subject for email
+          _subject: `Portfolio Contact: ${formData.subject}`,
         }),
       });
 
       if (response.ok) {
-        // Track successful form submission
         trackPortfolioInteraction.contactFormSubmit();
-        
+
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your message. I'll get back to you soon!",
         });
-        
-        // Reset form
+
         setFormData({
           name: "",
           email: "",
           subject: "",
-          message: ""
+          message: "",
         });
-        
-        // Reset form start tracking
         setHasStarted(false);
       } else {
         throw new Error("Failed to send message");
@@ -85,7 +95,8 @@ const Contact = () => {
       console.error("Error sending message:", error);
       toast({
         title: "Failed to send message",
-        description: "Something went wrong. Please try again or contact me directly via email.",
+        description:
+          "Something went wrong. Please try again or contact me directly via email.",
         variant: "destructive",
       });
     } finally {
@@ -100,18 +111,22 @@ const Contact = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold mb-4">Contact Me</h1>
-        <p className="text-xl text-muted-foreground mb-12">
-          Have a project in mind or just want to chat? Get in touch.
+        <h1 className="text-4xl font-bold mb-4">Contact</h1>
+        <p className="text-xl text-muted-foreground mb-4 max-w-2xl">
+          {profile.opportunities}
         </p>
-        
+        <p className="text-muted-foreground mb-12 max-w-2xl">
+          {profile.positioning}
+        </p>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
             <Card>
               <CardHeader>
                 <CardTitle>Send a Message</CardTitle>
                 <CardDescription>
-                  Fill out the form below and I'll get back to you as soon as possible.
+                  Fill out the form below and I'll get back to you as soon as
+                  possible.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -119,64 +134,64 @@ const Contact = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="name">Name</Label>
-                      <Input 
+                      <Input
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        onFocus={() => handleFieldFocus('name')}
-                        onBlur={() => handleFieldBlur('name')}
+                        onFocus={() => handleFieldFocus("name")}
+                        onBlur={() => handleFieldBlur("name")}
                         placeholder="Your name"
                         required
                       />
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="email">Email</Label>
-                      <Input 
+                      <Input
                         id="email"
                         name="email"
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        onFocus={() => handleFieldFocus('email')}
-                        onBlur={() => handleFieldBlur('email')}
+                        onFocus={() => handleFieldFocus("email")}
+                        onBlur={() => handleFieldBlur("email")}
                         placeholder="your.email@example.com"
                         required
                       />
                     </div>
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="subject">Subject</Label>
-                    <Input 
+                    <Input
                       id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      onFocus={() => handleFieldFocus('subject')}
-                      onBlur={() => handleFieldBlur('subject')}
+                      onFocus={() => handleFieldFocus("subject")}
+                      onBlur={() => handleFieldBlur("subject")}
                       placeholder="What is this regarding?"
                       required
                     />
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="message">Message</Label>
-                    <Textarea 
+                    <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      onFocus={() => handleFieldFocus('message')}
-                      onBlur={() => handleFieldBlur('message')}
+                      onFocus={() => handleFieldFocus("message")}
+                      onBlur={() => handleFieldBlur("message")}
                       placeholder="Your message here..."
                       rows={6}
                       required
                     />
                   </div>
-                  
-                  <Button 
-                    type="submit" 
+
+                  <Button
+                    type="submit"
                     className="w-full"
                     disabled={isSubmitting}
                   >
@@ -186,43 +201,92 @@ const Contact = () => {
               </CardContent>
             </Card>
           </div>
-          
-          <div>
+
+          <div className="space-y-6">
             <Card>
               <CardHeader>
                 <CardTitle>Contact Information</CardTitle>
-                <CardDescription>
-                  Other ways to reach me
-                </CardDescription>
+                <CardDescription>Other ways to reach me</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="flex items-start gap-3">
                   <Mail className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-medium">Email</h3>
-                    <p className="text-muted-foreground">{config.contact.email}</p>
+                    <a
+                      href={`mailto:${config.contact.email}`}
+                      className="text-muted-foreground hover:text-primary"
+                      onClick={() =>
+                        trackSocialMedia.email("contact_page")
+                      }
+                    >
+                      {config.contact.email}
+                    </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-3">
                   <Phone className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-medium">Phone</h3>
-                    <p className="text-muted-foreground">{config.contact.phone}</p>
+                    <a
+                      href={`tel:+1${config.contact.phone.replace(/\D/g, "")}`}
+                      className="text-muted-foreground hover:text-primary"
+                      onClick={() =>
+                        trackSocialMedia.phone("contact_page")
+                      }
+                    >
+                      {config.contact.phone}
+                    </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 text-primary mt-1" />
                   <div>
                     <h3 className="font-medium">Location</h3>
-                    <p className="text-muted-foreground">{config.contact.location}</p>
+                    <p className="text-muted-foreground">
+                      {config.contact.location}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Linkedin className="h-5 w-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-medium">LinkedIn</h3>
+                    <a
+                      href={config.contact.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary"
+                      onClick={() => trackSocialMedia.linkedin()}
+                    >
+                      linkedin.com/in/sarthakmishraftw
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Github className="h-5 w-5 text-primary mt-1" />
+                  <div>
+                    <h3 className="font-medium">GitHub</h3>
+                    <a
+                      href={config.contact.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-muted-foreground hover:text-primary"
+                      onClick={() => trackSocialMedia.github("contact_page")}
+                    >
+                      github.com/sarrrthakkk
+                    </a>
                   </div>
                 </div>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="flex-col items-stretch gap-3">
+                <ResumeButton className="w-full" size="default" />
                 <p className="text-sm text-muted-foreground">
-                  I'm currently available for full-time positions in backend development, cloud engineering, and artificial intelligence.
+                  {profile.shortTitle}
                 </p>
               </CardFooter>
             </Card>

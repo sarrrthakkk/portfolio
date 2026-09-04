@@ -58,9 +58,9 @@ const TypewriterEffect = ({
   }, [displayText, isDeleting, wordIndex, isWaiting, words, typingSpeed, deletingSpeed, delayBetweenWords]);
 
   return (
-    <span className={`typing-cursor inline-block ${className}`}>
+    <span className={`typing-cursor inline whitespace-nowrap ${className}`}>
       {displayText.split('').map((char, index) => (
-        <span key={index} className="text-blue-500">
+        <span key={index} className="text-primary">
           {char}
         </span>
       ))}

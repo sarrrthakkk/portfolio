@@ -1,35 +1,31 @@
 import { motion } from "framer-motion";
+import { Mail, Phone, Linkedin } from "lucide-react";
 import aboutPhoto from "@/assets/about-photo.jpg";
 import { trackSocialMedia, trackPortfolioInteraction } from "@/lib/analytics";
-
-const skills = [
-  // Cloud & Infrastructure
-  "Kubernetes", "Docker", "AWS", "Linux",
-  // Programming Languages
-  "Python", "Shell Scripting", "PHP", "Perl", "Java", "C", "C++", "Go",
-  // Databases & Data Processing
-  "MongoDB", "MySQL", "Apache Kafka", "NumPy",
-  // Networking & APIs
-  "NAT Gateways", "API Gateways",
-  // AI & Machine Learning
-  "PyTorch", "Transformer Architecture", "Attention Mechanisms", 
-  "Key-Value Caching", "Grouped Query Attention", "Rotary Positional Embeddings",
-  "RMSNorm", "Language Modeling", "Sequence Modeling", "Deep Learning", 
-  "Neural Networks", "Model Optimization",
-  // Tools & Others
-  "Git", "LaTeX", "MATLAB"
-];
+import {
+  about,
+  skillDomains,
+  education,
+  timeline,
+  certifications,
+  profile,
+} from "@/content";
+import { config } from "@/lib/config";
+import ResumeButton from "@/components/ResumeButton";
 
 const About = () => {
-  const handleContactClick = (type: 'email' | 'phone' | 'linkedin', context: string) => {
+  const handleContactClick = (
+    type: "email" | "phone" | "linkedin",
+    context: string
+  ) => {
     switch (type) {
-      case 'email':
+      case "email":
         trackSocialMedia.email(context);
         break;
-      case 'phone':
+      case "phone":
         trackSocialMedia.phone(context);
         break;
-      case 'linkedin':
+      case "linkedin":
         trackSocialMedia.linkedin();
         break;
     }
@@ -46,141 +42,209 @@ const About = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-bold mb-8">About Me</h1>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <h1 className="text-4xl font-bold mb-8">About</h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-16">
           <div className="md:col-span-1">
             <img
               src={aboutPhoto}
               alt="Sarthak Mishra"
               className="bg-muted aspect-square rounded-full overflow-hidden mb-4 object-cover w-full h-auto"
             />
-            <h2 className="text-2xl font-semibold mb-2">Sarthak Mishra</h2>
-            <p className="text-muted-foreground">Full Stack Developer, AI Researcher & Cloud Engineer</p>
-            <div className="mt-4">
-              <p className="text-sm">
-                📧 <a 
-                  href="mailto:smish147@asu.edu" 
-                  className="text-primary hover:underline"
-                  onClick={() => handleContactClick('email', 'about_page')}
-                >
-                  smish147@asu.edu
-                </a>
-              </p>
-              <p className="text-sm">
-                📞 <a 
-                  href="tel:+16232767027" 
-                  className="text-primary hover:underline"
-                  onClick={() => handleContactClick('phone', 'about_page')}
-                >
-                  623-276-7027
-                </a>
-              </p>
-              <p className="text-sm">
-                💼 <a 
-                  href="https://linkedin.com/in/sarthakmishraftw" 
-                  className="text-primary hover:underline"
-                  onClick={() => handleContactClick('linkedin', 'about_page')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  LinkedIn Profile
-                </a>
-              </p>
+            <h2 className="text-2xl font-semibold mb-2">{profile.name}</h2>
+            <p className="text-muted-foreground text-sm mb-4">
+              {profile.shortTitle}
+            </p>
+            <div className="space-y-2 text-sm mb-4">
+              <a
+                href={`mailto:${config.contact.email}`}
+                className="flex items-center gap-2 text-primary hover:underline"
+                onClick={() => handleContactClick("email", "about_page")}
+              >
+                <Mail className="h-4 w-4" />
+                {config.contact.email}
+              </a>
+              <a
+                href={`tel:+1${config.contact.phone.replace(/\D/g, "")}`}
+                className="flex items-center gap-2 text-primary hover:underline"
+                onClick={() => handleContactClick("phone", "about_page")}
+              >
+                <Phone className="h-4 w-4" />
+                {config.contact.phone}
+              </a>
+              <a
+                href={config.contact.linkedin}
+                className="flex items-center gap-2 text-primary hover:underline"
+                onClick={() => handleContactClick("linkedin", "about_page")}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
             </div>
+            <ResumeButton size="default" className="w-full" />
           </div>
-          
-          <div className="md:col-span-2">
-            <div className="prose max-w-none">
-              <p className="text-lg mb-4">
-                Experienced professional with expertise in full-stack development, artificial intelligence research, and cloud engineering. 
-                Specialized in building scalable applications, implementing advanced AI models, and architecting robust cloud solutions.
-              </p>
-              
-              <p className="text-lg mb-8">
-                Proficient in transformer architectures, deep learning frameworks, and cloud infrastructure. 
-                Demonstrated success in developing efficient AI solutions, optimizing model performance, and implementing 
-                secure cloud-based systems with a focus on scalability and reliability.
-              </p>
-              
-              <h3 className="text-xl font-semibold mb-4">Skills</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 mb-8">
-                {skills.map((skill) => (
-                  <span 
-                    key={skill} 
-                    className="px-3 py-1 bg-secondary text-secondary-foreground rounded-full text-sm text-center cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
-                    onMouseEnter={() => handleSkillHover(skill)}
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-              
-              <h3 className="text-xl font-semibold mb-4">Education</h3>
-              
-              <div className="space-y-6 mb-8">
-                <div className="border-l-2 border-primary pl-4">
-                  <h4 className="text-lg font-medium">Master of Science in Computer Science</h4>
-                  <p className="text-muted-foreground">Arizona State University, Tempe, AZ • Graduating December 2026</p>
-                  <p className="mt-2">Ira A. Fulton Schools of Engineering</p>
-                  <p className="mt-1">Relevant Coursework: CSE575-Statistical Machine Learning; CSE551-Foundation of Algorithms; CSE548-Advanced Computer Network Security</p>
-                  <p className="mt-1">GPA: 3.9/4</p>
-                </div>
-                
-                <div className="border-l-2 border-primary pl-4">
-                  <h4 className="text-lg font-medium">Bachelor of Technology in Computer Science and Engineering</h4>
-                  <p className="text-muted-foreground">SRM Institute of Science and Technology, India • Graduated: May 2021</p>
-                  <p className="mt-2">GPA: 3.48/4 (91.03%)</p>
-                </div>
-              </div>
-              
-              <h3 className="text-xl font-semibold mb-4">Experience</h3>
-              
-              <div className="space-y-6">
-                <div className="border-l-2 border-primary pl-4">
-                  <h4 className="text-lg font-medium">Software Developer - Project Management Consultant, EOSS Technology Team</h4>
-                  <p className="text-muted-foreground">Arizona State University, Tempe, AZ • April 2025 - Present</p>
-                  <ul className="list-disc ml-5 mt-2">
-                    <li>Develop and maintain backend scripts for Airtable integration and automation</li>
-                    <li>Contribute to the development of SmartDart, a university-wide transportation app for booking golf carts</li>
-                    <li>Collaborate with cross-functional teams to enhance campus mobility solutions</li>
-                    <li>Implement efficient backend solutions to support the university's digital transformation initiatives</li>
-                  </ul>
-                </div>
 
-                <div className="border-l-2 border-primary pl-4">
-                  <h4 className="text-lg font-medium">Technical Lead, Nokia</h4>
-                  <p className="text-muted-foreground">December 2020 - December 2024</p>
-                  <ul className="list-disc ml-5 mt-2">
-                    <li>Led core backend development projects based on microservice architecture with CI/CD pipelines</li>
-                    <li>Streamlined workflows and increased operational efficiency by 20%</li>
-                    <li>Conducted extensive data analysis and reporting to support client requirements</li>
-                    <li>Supported in bug fixing, feature development and other deliveries every release</li>
-                    <li>Mentored junior engineers, enhancing team performance and knowledge-sharing</li>
-                  </ul>
-                </div>
-                
-                <div className="border-l-2 border-primary pl-4">
-                  <h4 className="text-lg font-medium">Community Head, Aaruush Techno-Management Fest, SRM IST</h4>
-                  <p className="text-muted-foreground">May 2018 - Sep 2020</p>
-                  <ul className="list-disc ml-5 mt-2">
-                    <li>Organized events for 72,000+ participants, managing logistics, sponsorships, and guest relations</li>
-                    <li>Secured sponsorships totaling $15,000, enhancing the scope and quality of events</li>
-                    <li>Organized fitness and wellness-related events, securing sponsorships and coordinating with high-profile guests</li>
-                    <li>Developed time management and conflict resolution skills through fast-paced event execution</li>
-                  </ul>
-                </div>
-              </div>
-
-              <h3 className="text-xl font-semibold mb-4 mt-8">Certifications</h3>
-              <ul className="list-disc ml-5">
-                <li>AWS Solution Architect Associate Certification (SimpliLearn)</li>
-                <li>Linux CLI Certification (CompTIA)</li>
-                <li>Architecting with Google Compute Engine Specialization Certification</li>
-              </ul>
-            </div>
+          <div className="md:col-span-2 space-y-4">
+            {about.bio.map((paragraph) => (
+              <p key={paragraph.slice(0, 40)} className="text-lg leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
           </div>
         </div>
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">How I Engineer</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {about.howIEngineer.map((item) => (
+              <div
+                key={item.title}
+                className="border-l-2 border-primary pl-4 py-1"
+              >
+                <h3 className="font-semibold text-lg mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm mb-2">{item.body}</p>
+                {"example" in item && item.example && (
+                  <p className="text-sm font-medium text-primary">
+                    {item.example}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">
+            Research & Technical Interests
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {about.researchInterests.map((area) => (
+              <div key={area.title} className="bg-secondary/50 rounded-lg p-5">
+                <h3 className="font-semibold mb-3">{area.title}</h3>
+                <ul className="space-y-1 text-sm text-muted-foreground">
+                  {area.items.map((item) => (
+                    <li key={item}>· {item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">Skills by Domain</h2>
+          <div className="space-y-8">
+            {skillDomains.map((domain) => (
+              <div key={domain.title}>
+                <h3 className="font-semibold mb-3">{domain.title}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {domain.items.map((skill) => (
+                    <span
+                      key={skill}
+                      className="px-3 py-1 bg-secondary text-secondary-foreground rounded-md text-sm cursor-default hover:bg-primary hover:text-primary-foreground transition-colors"
+                      onMouseEnter={() => handleSkillHover(skill)}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">Career Timeline</h2>
+          <div className="relative border-l-2 border-primary ml-3 space-y-8">
+            {timeline.map((item) => (
+              <div key={`${item.year}-${item.title}`} className="pl-8 relative">
+                <span className="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-primary" />
+                <p className="text-sm font-bold text-primary">{item.year}</p>
+                <p className="text-foreground">{item.title}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">Education</h2>
+          <div className="space-y-6">
+            {education.map((item) => (
+              <div
+                key={item.degree}
+                className="border-l-2 border-primary pl-4"
+              >
+                <h3 className="text-lg font-medium">{item.degree}</h3>
+                <p className="text-muted-foreground">
+                  {item.school} · {item.dates}
+                </p>
+                <p className="mt-1">{item.details}</p>
+                {item.areas.length > 0 && (
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Focus areas: {item.areas.join(" · ")}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">
+            Production Systems at Global Scale
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-secondary/50 rounded-lg p-5">
+              <h3 className="font-semibold mb-2">AWS</h3>
+              <p className="text-sm text-muted-foreground">
+                {about.customers.aws}
+              </p>
+            </div>
+            <div className="bg-secondary/50 rounded-lg p-5">
+              <h3 className="font-semibold mb-2">Nokia</h3>
+              <p className="text-sm text-muted-foreground mb-2">
+                {about.customers.nokia.description}
+              </p>
+              <p className="text-sm font-medium">
+                {about.customers.nokia.names.join(" · ")}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-2xl font-bold mb-6">Awards</h2>
+          {about.awards.map((award) => (
+            <div
+              key={award.title}
+              className="border border-primary/20 bg-primary/5 rounded-lg p-5 max-w-2xl"
+            >
+              <p className="text-sm text-primary font-medium mb-1">
+                {award.date}
+              </p>
+              <h3 className="text-xl font-semibold mb-2">{award.title}</h3>
+              <p className="text-muted-foreground">{award.description}</p>
+            </div>
+          ))}
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold mb-6">Certifications</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {certifications.map((group) => (
+              <div key={group.issuer}>
+                <h3 className="font-semibold mb-2">{group.issuer}</h3>
+                <ul className="list-disc ml-5 text-muted-foreground space-y-1">
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
       </motion.div>
     </div>
   );
